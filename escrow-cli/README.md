@@ -111,8 +111,7 @@ All commands below assume you are running them from the project root. You might 
 The Maker initializes the escrow, depositing Token A and specifying how much of Token B they want in return.
 
 ```bash
-dotenv run cargo run -- initialize \
-  --program-id $ESCROW_PROGRAM_ID \
+cargo run -- initialize \
   --wallet ./maker.json \
   --mint-a $TOKEN_A_MINT \
   --mint-b $TOKEN_B_MINT \
@@ -127,8 +126,7 @@ This action locks the specified amount of Token A into a PDA controlled by the e
 Anyone can inspect the details of an active escrow:
 
 ```bash
-dotenv run cargo run -- view \
-  --program-id $ESCROW_PROGRAM_ID \
+cargo run -- view \
   --escrow-id 1 \
   --maker $(solana-keygen pubkey ./maker.json)
 ```
@@ -138,8 +136,7 @@ dotenv run cargo run -- view \
 The Taker executes the swap. They send the required amount of Token B to the Maker, and the program automatically releases Token A from the escrow vault to the Taker.
 
 ```bash
-dotenv run cargo run -- exchange \
-  --program-id $ESCROW_PROGRAM_ID \
+cargo run -- exchange \
   --wallet ./taker.json \
   --maker $(solana-keygen pubkey ./maker.json) \
   --escrow-id 1
@@ -155,8 +152,7 @@ Upon successful exchange, the program automatically:
 If the Maker decides to revoke the offer before it's accepted by a Taker, they can cancel the escrow.
 
 ```bash
-dotenv run cargo run -- cancel \
-  --program-id $ESCROW_PROGRAM_ID \
+cargo run -- cancel \
   --wallet ./maker.json \
   --mint-a $TOKEN_A_MINT \
   --escrow-id 1
